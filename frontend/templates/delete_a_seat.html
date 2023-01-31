@@ -1,0 +1,30 @@
+#TODO: Code muss noch getestet werden
+{% extends "base.html" %}
+{% block title %}Book a Seat{% endblock %}
+{% block content %}
+    <title>Delete a Seat</title>
+    <h1>Delete Seat</h1>
+
+    <form method="POST">
+        <label for="seat_input">Seat:</label>
+        <input type="text" id="seat_input" name="seat_input">
+        <br>
+        <div>
+            <button type="submit" class="btn btn-danger" onClick="deleteSeat()">Delete Seat</button>
+        </div>
+    </form>
+
+    <script>
+        function deleteSeat() {
+            var seat = document.getElementById("seat_input").value;
+        #
+            Code
+            zum
+            löschen
+            fehlt
+            noch ?
+                alert("Seat " + seat + " deleted.");
+        }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends "base.html" %} {% block title %}admin{% endblock %} {% block content %}
+    <form method="POST">
+        <h3 align="center">Admin</h3>
+
+        <br/><br/><br/>
+
+        <head>
+            <style>
+                .center {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                }
+            </style>
+        </head>
+        <body>
+
+        <table border="1" , class="center">
+
+            <tr>
+                <th>ID</th>
+                <th>E-Mail</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Admin</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    {% if user.admin == False %}
+                        <td class="text-center">&#10060;</td>
+                    {% else %}
+                        <td class="text-center">&#10004;&#65039;</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <br/><br/><br/>
+
+        <table border="1" , class="center">
+            <caption>Reservation Overview</caption>
+            <tr>
+                <th>available Seats</th>
+                <th>booked Seats</th>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;">
+                    <table>
+                        <tr>
+                            <th>Seat Number</th>
+                        </tr> {% for seat in seats_unbooked %}
+                        <tr>
+                            <td>{{ seat }}</td>
+                        </tr>{% endfor %}</table>
+                </td>
+                <td style="vertical-align: top;">
+                    <table>
+                        <tr>
+                            <th>Seat Number</th>
+                        </tr> {% for seat in seats_booked %}
+                        <tr>
+                            <td>{{ seat }}</td>
+                        </tr>{% endfor %}</table>
+                </td>
+            </tr>
+
+        </table>
+
+
+        <br/><br/><br/>
+
+        <div class="center">
+
+            <table>
+            <thead>
+            <tr class="text-center">
+                {% for x in header_caption %}
+                <th>{{ x }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            <form method="POST" class="text-center">
+
+                {% for row in flight.rows %}
+                {% set row_number = loop.index %}
+                <tr>
+                    <td>{{ row_number }}</td>
+                    {% for seat in row.elements %}
+                    {% if seat.booked == False and seat.caption != "| |" %}
+                    {% if seat.booking_id != None %}
+                    <td>
+                        <button class="btn btn-primary" ;
+                                style="background-color:red;border-color:red; color:white"
+                                onclick=cancel_booking({{seat.seat_str}}, {{seat.booking_id}})>&#129681;
+                        </button>
+                    </td>
+                    {% else %}
+                    <td>
+                        <button class="btn btn-primary" ;
+                                style="background-color:green; border-color:green; color:white"
+                                onclick=book({{seat.seat_str}}, {{seat.seat_id}})>&#129681;
+                        </button>
+                    </td>
+                    {% endif %}
+                    {% elif seat.caption == None %}
+                    <td class="text-center">| |</td>
+                    {% else %}
+                    <td class="text-center">
+                        <button class="btn btn-primary" ;
+                                style="background-color:red;border-color:red; color:white"
+                                onclick=cancel_booking({{seat.seat_str}}, {{seat.booking_id}})>X
+                        </button>
+                    </td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+
+                <script>
+            function book(seat_str, seat_id) {
+                if(confirm(`Do you want to book seat ${seat_str}?`)) {
+                    # Booking confirmed
+                    alert(`We will try to book seat ${seat_str} for you.`)
+                } else {
+                    # Booking declined
+                }
+            }
+            function cancel_booking(seat_str, booking_id) {
+                if(confirm(`Do you really want to cancel your booking for seat ${seat_str}?`)) {
+                    # Booking cancellation confirmed
+                    alert(`You cancelled your booking for seat ${seat_str}.`)
+                } else {
+                    # Booking cancellation declined
+                }
+            }
+                </script>
+
+            </form>
+            </tbody>
+
+
+        </table>
+
+        </div>
+
+        <div class="center">
+
+            <img src={{ chart_path }}>
+
+        </div>
+        </body>
+
+    </form>
+
+{% endblock %}

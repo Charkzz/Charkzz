@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Book a Seat{% endblock %}
+{% block content %}
+    <title>Book a Seat</title>
+    <h1 class="text-center">Book a Seat</h1>
+    {% extends "base.html" %}
+{% block title %}Book a Seat{% endblock %}
+{% block content %}
+    <title>Book a Seat</title>
+    <h1 class="text-center">Book a Seat</h1>
+    <form method="POST" class="text-center">
+
+        <div class="form-group d-flex justify-content-center">
+            <div>
+                <label for="seat">Seat</label>
+                <input type="text" class="form-control" id="seat" name="seat" required>
+            </div>
+        </div>
+        <div>
+
+
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" onclick="myFunction()">Book Seat</button>
+        </div>
+         <img src="/path/to/logo.png" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;">
+</form>
+    </form>
+
+    <form method="POST">
+        <textarea name="note" id="note" class="form-control" disabled>{{ seat_string }}</textarea>
+    </form>
+    {% for booking in bookings %}
+    <script>
+        function myFunction() {
+            confirm("Confirm your reservation!");
+        }
+    </script>
+{% endblock %}
+
+
+
+        <div class="form-group d-flex justify-content-center">
+            <div>
+                <label for="seat">Seat</label>
+                <input type="text" class="form-control" id="seat" name="seat" required>
+            </div>
+        </div>
+        <div>
+
+
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" onclick="myFunction()">Book Seat</button>
+        </div>
+         <img src="/path/to/logo.png" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:-1;">
+</form>
+    </form>
+
+    <form method="POST">
+        <textarea name="note" id="note" class="form-control" disabled>{{ seat_string }}</textarea>
+    </form>
+    <script>
+        function myFunction() {
+            confirm("Confirm your reservation!");
+        }
+    </script>
+{% endblock %}
+
